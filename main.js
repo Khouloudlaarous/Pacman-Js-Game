@@ -1,19 +1,25 @@
 var world = [
-    [2,2,2,2,2,2,2,2,2,2,2],
-    [2,1,1,1,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,0,0,1,2],
-    [2,1,2,1,2,0,1,1,2,1,2],
-    [2,1,1,1,2,1,2,2,2,1,2],
-    [2,1,1,2,2,1,1,1,1,1,2],
-    [2,1,2,1,1,1,1,1,1,1,2],
-    [2,2,2,2,2,2,2,2,2,2,2]
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,1,1,1,1,1,1,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,1,1,1,2,2,1,2],
+    [2,1,1,1,1,1,1,1,1,1,2,2,1,2],
+    [2,1,1,1,1,1,1,0,0,1,2,1,1,2],
+    [2,1,2,1,2,0,1,1,2,1,2,1,1,2],
+    [2,1,1,1,2,1,2,2,2,1,2,2,1,2],
+    [2,1,1,1,2,1,2,2,2,1,2,2,1,2],
+    [2,1,1,1,2,1,2,2,2,1,2,2,1,2],
+    [2,1,1,1,2,1,2,2,2,1,2,2,1,2],
+    [2,1,1,2,2,1,1,1,1,1,2,2,1,2],
+    [2,1,2,1,1,1,1,1,1,1,1,1,1,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2]
 ];
 
+var score = 0;
+
 var pacman ={
-    x:0,
-    y:0
+    x:1,
+    y:1,
+    direction: 'left'
 };
 
 function displayWorld() {
@@ -41,30 +47,43 @@ function displayPacman() {
     document.getElementById('pacman').style.left = pacman.x*20+"px";
 }
 
+function displayScore() {
+    document.getElementById('score').innerHTML = score;
+}
+
 
 
 displayWorld();
 displayPacman();
+displayScore();
 
 
 
 document.onkeydown = function(e){
-    if(e.keyCode == 37) {
+    if(e.keyCode == 37 && world[pacman.y][pacman.x-1] != 2) {
         pacman.x--;
+        document.getElementById('pacman').style.transform = 'rotate(-180deg)';
     }
-    else if (e.keyCode == 39) {
+    else if (e.keyCode == 39 && world[pacman.y][pacman.x+1] != 2) {
         pacman.x++;
+        document.getElementById('pacman').style.transform = 'rotate(-0deg)';
+        
     }
-    else if (e.keyCode == 38) {
+    else if (e.keyCode == 38 && world[pacman.y-1][pacman.x] != 2) {
         pacman.y--;
+        document.getElementById('pacman').style.transform = 'rotate(-90deg)';
     }
-    else if (e.keyCode == 40) {
+    else if (e.keyCode == 40 && world[pacman.y+1][pacman.x] != 2) {
         pacman.y++;
+        document.getElementById('pacman').style.transform = 'rotate(90deg)';
     }
     if (world[pacman.y][pacman.x] == 1){
         world[pacman.y][pacman.x] = 0;
+        score +=5;
         displayWorld();
+        displayScore();
     }
 
     displayPacman();
 };
+
