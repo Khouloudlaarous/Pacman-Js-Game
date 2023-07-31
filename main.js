@@ -67,7 +67,6 @@ document.onkeydown = function(e){
     else if (e.keyCode == 39 && world[pacman.y][pacman.x+1] != 2) {
         pacman.x++;
         document.getElementById('pacman').style.transform = 'rotate(-0deg)';
-        
     }
     else if (e.keyCode == 38 && world[pacman.y-1][pacman.x] != 2) {
         pacman.y--;

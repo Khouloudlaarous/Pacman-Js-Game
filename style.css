@@ -22,7 +22,7 @@ div .brick {
 }
 
 div.coin {
-    background-image: url('packman.png');
+    background-image: url('coin.png');
     background-size:  80%;
     background-repeat: no-repeat;
     background-position: center;
